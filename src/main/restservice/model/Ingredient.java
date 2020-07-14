@@ -2,8 +2,14 @@ package restservice.model;
 
 public class Ingredient {
     private String ingredientName;
-    private String amt;
+    private String ingredientId;
 
+    public String getIngredientId() {
+        return ingredientId;
+    }
+    public void setIngredientId(String ingredientId) {
+        this.ingredientId = ingredientId;
+    }
     public String getIngredientName() {
         return ingredientName;
     }
@@ -12,11 +18,4 @@ public class Ingredient {
         this.ingredientName = name;
     }
 
-    public String getAmt() {
-        return amt;
-    }
-
-    public void setAmt(String amt) {
-        this.amt = amt;
-    }
 }

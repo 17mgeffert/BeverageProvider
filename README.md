@@ -1,2 +1,4 @@
-# BeverageProvider
-A fun application that allows you the ability to pick your parties signature drink
+Running the application: it runs on port 8080,
+navigate to locahost:8080/test to test the application
+
+recipe data structure: id,name,instructions,ingredients
