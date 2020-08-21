@@ -7,7 +7,6 @@ import restservice.model.Ingredient;
 import restservice.model.Recipe;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,8 +27,6 @@ public class GatherDrinkData {
     //Just a test method to make my life easier
     public String getTestData(){
         String jsonStr="";
-
-
         //ArrayList<Recipe> recipes = storage.readRecipes();
 
         ObjectMapper mapper = new ObjectMapper();
@@ -50,37 +47,55 @@ public class GatherDrinkData {
     }
 
 
+    /**
+     * This method will take in a collection of possible ingredients, as well as a data structure
+     * containing all recipes, broken down based on ingredients.
+     * @param ingredients
+     * @param map
+     * @return
+     */
     public Recipe getRandomRecipe(String[] ingredients,HashMap<String, ArrayList<Recipe>>map ){
         Collections.shuffle(Arrays.asList(ingredients));
 
         boolean isOver = false;
         int index=0;
-        Recipe pickedRecipe=null;
-        while(!isOver){
-            if(map.containsKey(ingredients[index])){
+        Recipe pickedRecipe = null;
 
+        //Run while list of possible ingredients is not over, or until we find
+        //a recipe that works
+        while(!isOver){
+            if(index==ingredients.length){
+                isOver=true;
+            }
+            //If Alcohol, then proceed
+            else if(map.containsKey(ingredients[index])){
                 pickedRecipe = getRecipeFromHashMap(ingredients,map.get(ingredients[index]));
                 if(pickedRecipe!=null) {
                     isOver = true;
                 }
-            }else if(index==ingredients.length){
-                isOver=true;
             }
             else{
                 index++;
             }
-
         }
-        //TODO This is the main method that will be called to find a random recipe
-        return null;
+        return pickedRecipe;
     }
 
+    /**
+     * This method will take in a collection of possible ingredients as well as a list of
+     * all recipes involving a single alcohol, and then return a possible recipe or null
+     * @param ingredients
+     * @param recipes
+     * @return
+     */
     private Recipe getRecipeFromHashMap(String[] ingredients, ArrayList<Recipe> recipes){
+
         ArrayList<Recipe> possibleRecipes=new ArrayList<>();
         for(Recipe r:recipes){
             if(r.getIngredients().size()<=ingredients.length){
-                //if subset of ingredients and recipes.ingredients
-                //add r to possibleRecipes
+                if(Arrays.asList(ingredients).containsAll(r.getIngredients())){
+                    possibleRecipes.add(r);
+                }
             }
         }
         if(possibleRecipes.size()>0){
@@ -91,7 +106,7 @@ public class GatherDrinkData {
 
 
     /**
-     * This method will generate a hashmap with all alchohols split up based on recipes
+     * This method will generate a hashmap with all alcohols split up based on recipes
      * @return
      */
     public HashMap<String, ArrayList<Recipe>> getRecipeHashMap(){
@@ -123,11 +138,10 @@ public class GatherDrinkData {
         return null;
     }
 
-
-    /*
+    /**
     This method will create a hash map with keys corresponding to alcohols and empty
     values
-     */
+     **/
     private HashMap<String, ArrayList<Recipe>> setupHashMap(){
         HashMap<String, ArrayList<Recipe>> map = new HashMap<>();
         //ArrayList<Ingredient> ingredients = storage.readIngredients();
@@ -139,8 +153,4 @@ public class GatherDrinkData {
         }
         return map;
     }
-
-
-
-
 }
