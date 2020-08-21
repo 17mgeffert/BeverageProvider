@@ -73,10 +73,12 @@ public class DataStorage {
                 //Here is a good place to do data validation eventually
                 String id = ingredient[0];
                 String name = ingredient[1];
+                boolean isAlcohol = Boolean.parseBoolean(ingredient[2]);
 
                 Ingredient newIngredient = new Ingredient();
                 newIngredient.setIngredientId(id);
                 newIngredient.setIngredientName(name);
+                newIngredient.setAlcohol(isAlcohol);
 
                 ingredients.add(newIngredient);
             }

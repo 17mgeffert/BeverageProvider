@@ -1,6 +1,7 @@
 package restservice;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,16 @@ import restservice.model.Recipe;
 public class Controller {
 
 	@Autowired
-	private GatherDrinkData cust;
+	private GatherDrinkData drinkData = new GatherDrinkData();
 	private static final String template = "Hello, %s!";
 	private final AtomicLong counter = new AtomicLong();
+
+	HashMap<String, ArrayList<Recipe>> recipes =drinkData.getRecipeHashMap();
+
+
+	private void initialize(HashMap<String, Recipe[]> map){
+
+	}
 
 	//This is simply a testing endpoint
 	@GetMapping("/test")
@@ -38,8 +46,19 @@ public class Controller {
 		ingredient.setIngredientName("Vodka");
 		ingredients.add(ingredient);
 
-		GatherDrinkData dataAccess = new GatherDrinkData();
 		//return ingredients;
-		return dataAccess.getTestData();
+		return drinkData.getTestData();
+	}
+
+	@GetMapping("/recipeTest")
+	public Recipe getRecipeTest() {
+
+		String[] arr = new String[2];
+		arr[0]="I1";
+		arr[1]="I2";
+
+		Recipe r =drinkData.getRandomRecipe(arr,recipes);
+
+		return r; //If null return an error
 	}
 }

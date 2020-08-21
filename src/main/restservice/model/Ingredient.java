@@ -3,6 +3,7 @@ package restservice.model;
 public class Ingredient {
     private String ingredientName;
     private String ingredientId;
+    private boolean isAlcohol;
 
     public String getIngredientId() {
         return ingredientId;
@@ -18,4 +19,11 @@ public class Ingredient {
         this.ingredientName = name;
     }
 
+    public boolean isAlcohol() {
+        return isAlcohol;
+    }
+
+    public void setAlcohol(boolean alcohol) {
+        isAlcohol = alcohol;
+    }
 }

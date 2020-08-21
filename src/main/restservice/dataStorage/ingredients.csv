@@ -1,5 +1,5 @@
-I1,"Whiskey"
-I2,"7UP"
-I3,"Vodka"
-I4,"Lemon"
-I5,"Club Soda"
+I1,Whiskey,true
+I2,7UP,false
+I3,Vodka,true
+I4,Lemon,false
+I5,Club Soda,false
