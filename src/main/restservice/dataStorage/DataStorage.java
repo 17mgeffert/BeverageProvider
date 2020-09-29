@@ -22,7 +22,6 @@ public class DataStorage {
      */
     public ArrayList<Recipe> readRecipes(){
         String csvFile = ".\\src\\main\\restservice\\dataStorage\\recipes.csv";
-        String hold="";
         ArrayList<Recipe> recipes = new ArrayList<>();
         try(BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
 
@@ -60,7 +59,6 @@ public class DataStorage {
      * TODO: Add better validation and faster method to query data
      */
     public ArrayList<Ingredient> readIngredients(){
-        String hold="";
         String csvFile = ".\\src\\main\\restservice\\dataStorage\\ingredients.csv";
         ArrayList<Ingredient> ingredients = new ArrayList<>();
         try(BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
@@ -73,10 +71,12 @@ public class DataStorage {
                 //Here is a good place to do data validation eventually
                 String id = ingredient[0];
                 String name = ingredient[1];
+                boolean isAlcohol = Boolean.parseBoolean(ingredient[2]);
 
                 Ingredient newIngredient = new Ingredient();
                 newIngredient.setIngredientId(id);
                 newIngredient.setIngredientName(name);
+                newIngredient.setAlcohol(isAlcohol);
 
                 ingredients.add(newIngredient);
             }
