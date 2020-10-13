@@ -17,8 +17,8 @@ public class GatherDrinkData {
     private String data;
     private DataStorage storage = new DataStorage();
 
-    ArrayList<Ingredient> ingredients = storage.readIngredients();
-    ArrayList<Recipe> recipes = storage.readRecipes();
+    ArrayList<Ingredient> ingredients = storage.getIngredients();
+    ArrayList<Recipe> recipes = storage.getRecipes();
     public void initialize(){
         data = "Hello World!";
         //will initialize the data
@@ -110,7 +110,7 @@ public class GatherDrinkData {
      * @return
      */
     public HashMap<String, ArrayList<Recipe>> getRecipeHashMap(){
-        ArrayList<Recipe> recipes = storage.readRecipes();
+        ArrayList<Recipe> recipes = storage.getRecipes();
         HashMap<String, ArrayList<Recipe>> map = setupHashMap();
         for(Recipe r : recipes){
             for(String  id : r.getIngredients()){
