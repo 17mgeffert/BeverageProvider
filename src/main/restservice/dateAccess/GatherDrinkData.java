@@ -7,10 +7,8 @@ import restservice.model.Ingredient;
 import restservice.model.Recipe;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
+import java.lang.reflect.Array;
+import java.util.*;
 
 @Component
 public class GatherDrinkData {
@@ -44,6 +42,14 @@ public class GatherDrinkData {
             e.printStackTrace();
         }
         return jsonStr;
+    }
+
+    /**
+     * A method to access all the ingredient to display on the frontend
+     * @return
+     */
+    public ArrayList<Ingredient> getAllIngredients(){
+        return ingredients;
     }
 
 
@@ -117,6 +123,7 @@ public class GatherDrinkData {
                 Ingredient ingredient = getIngredientFromId(id);
                 if(ingredient.isAlcohol()){
                     ArrayList<Recipe>  list = map.get(ingredient.getIngredientId());
+                    System.out.println(r.getRecipeID());
                     list.add(r);
                     map.put(ingredient.getIngredientId(),list);
                 }
@@ -126,12 +133,13 @@ public class GatherDrinkData {
     }
 
     /**
-     * This method will get Ingredents based upon a given id
+     * This method will get Ingredients based upon a given id
      * @return
      */
     private Ingredient getIngredientFromId(String id){
+        //TODO Make better/faster with lambdas
         for(Ingredient i : ingredients){
-            if(i.getIngredientId().equals(id)){
+            if( i.getIngredientId().equals(id)){
                 return i;
             }
         }
@@ -148,7 +156,7 @@ public class GatherDrinkData {
         //TODO Make into a lambda expression
         for(Ingredient i: ingredients){
             if(i.isAlcohol()){
-                map.put(i.getIngredientName(),new ArrayList<Recipe>());
+                map.put(i.getIngredientId(),new ArrayList<Recipe>());
             }
         }
         return map;

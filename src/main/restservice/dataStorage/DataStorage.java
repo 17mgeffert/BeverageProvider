@@ -6,7 +6,6 @@ import restservice.model.Recipe;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -21,19 +20,21 @@ public class DataStorage {
 
     /**
      * This method allows the same version of the arraylist to be used only once
+     * to get recipes
      * @return
      */
     public ArrayList<Recipe> getRecipes(){
         return recipes;
     }
-
     /**
-     * This method allows the same version of the arraylist to be used only once
+     * This method allows the same version of the arraylist to be used only once to
+     * get ingredients
      * @return
      */
     public ArrayList<Ingredient> getIngredients(){
         return ingredients;
     }
+
     /**
      * This method will read a csv file containing the recipes and put them into a readable collection
      * @return ArrayList of recipes
@@ -63,7 +64,6 @@ public class DataStorage {
 
                 Recipe newRecipe = new Recipe(id,name,instructions,ingredients);
                 recipes.add(newRecipe);
-
             }
 
         }catch(IOException e) {
@@ -112,22 +112,9 @@ public class DataStorage {
      * @param id
      * @return
      */
-    public Recipe getRecipeById(String id){
+    /*public Recipe getRecipeById(String id){
         Optional<Recipe> possibleRecipe = null;
         possibleRecipe = recipes.stream().findFirst().filter(x-> x.getRecipeID().equals(id));
         return possibleRecipe.isPresent()? possibleRecipe.get():null;
-    }
-
-    /**
-     * This method will access a ingredient based on a given ID
-     * @param id
-     * @return
-     */
-    public Ingredient getIngredientById(String id){
-        Optional<Ingredient> possibleIngredient = null;
-        possibleIngredient = ingredients.stream().findFirst().filter(x-> x.getIngredientId().equals(id));
-        return possibleIngredient.isPresent()? possibleIngredient.get():null;
-    }
-
-
+    }*/
 }

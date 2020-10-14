@@ -1,12 +1,9 @@
 package restservice.dataStorage;
-//package com.mkyong.examples;
 
 import org.junit.jupiter.api.Test;
 import restservice.model.Ingredient;
 import restservice.model.Recipe;
-
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DataStorageTests {
@@ -23,7 +20,7 @@ public class DataStorageTests {
         assertFalse(ingredients.isEmpty());
     }
 
-    @Test
+   /* @Test
     public void testGetRecipeByIdValid(){
         Recipe possibleRecipe = dataStorage.getRecipeById("R1");
         assertNotNull(possibleRecipe);
@@ -42,5 +39,5 @@ public class DataStorageTests {
     public void testIngredientByIdInvalid(){
         Ingredient possibleIngredient = dataStorage.getIngredientById("X1");
         assertNull(possibleIngredient);
-    }
+    }*/
 }

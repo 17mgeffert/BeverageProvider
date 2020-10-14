@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,7 +41,6 @@ public class Controller {
 	//endpoint to get a random recipe
 	@GetMapping("/recipe")
 	public String getRecipe() {
-
 		ArrayList<Ingredient> ingredients = new ArrayList<>();
 		Ingredient ingredient = new Ingredient();
 		ingredient.setIngredientId("idHold");
@@ -50,7 +51,7 @@ public class Controller {
 		return drinkData.getTestData();
 	}
 
-	@GetMapping("/recipeTest")
+	@GetMapping("/Recipe")
 	public Recipe getRecipeTest() {
 
 		String[] arr = new String[2];
@@ -61,4 +62,17 @@ public class Controller {
 
 		return r; //If null return an error
 	}
+
+	/**
+	 * This function is used by the frontend to gather all the ingredients
+	 * that need to be dispalyed on the frontend
+	 * @return
+	 */
+	@GetMapping("/ingredients-list")
+	public String getDisplayIngredients(){
+		//Ingredient[] i = drinkData.getAllIngredients();
+		String json = new Gson().toJson(drinkData.getAllIngredients());
+		return json;
+	}
+
 }
