@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class DataStorage {
 
@@ -14,13 +15,33 @@ public class DataStorage {
     String line = "";
     String cvsSplitBy = ",";
 
+    private ArrayList<Recipe> recipes = readRecipes();
+    private ArrayList<Ingredient> ingredients = readIngredients();
+
+    /**
+     * This method allows the same version of the arraylist to be used only once
+     * to get recipes
+     * @return
+     */
+    public ArrayList<Recipe> getRecipes(){
+        return recipes;
+    }
+    /**
+     * This method allows the same version of the arraylist to be used only once to
+     * get ingredients
+     * @return
+     */
+    public ArrayList<Ingredient> getIngredients(){
+        return ingredients;
+    }
+
     /**
      * This method will read a csv file containing the recipes and put them into a readable collection
      * @return ArrayList of recipes
      *
      * TODO : Add data validation for each field in case data is invalid
      */
-    public ArrayList<Recipe> readRecipes(){
+    private ArrayList<Recipe> readRecipes(){
         String csvFile = ".\\src\\main\\restservice\\dataStorage\\recipes.csv";
         ArrayList<Recipe> recipes = new ArrayList<>();
         try(BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
@@ -43,7 +64,6 @@ public class DataStorage {
 
                 Recipe newRecipe = new Recipe(id,name,instructions,ingredients);
                 recipes.add(newRecipe);
-
             }
 
         }catch(IOException e) {
@@ -58,7 +78,7 @@ public class DataStorage {
      *
      * TODO: Add better validation and faster method to query data
      */
-    public ArrayList<Ingredient> readIngredients(){
+    private ArrayList<Ingredient> readIngredients(){
         String csvFile = ".\\src\\main\\restservice\\dataStorage\\ingredients.csv";
         ArrayList<Ingredient> ingredients = new ArrayList<>();
         try(BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
@@ -87,15 +107,14 @@ public class DataStorage {
         return ingredients;
     }
 
-    public String getRecipeById(String id){
-        //TODO This method will return a single recipe based on an entered ID
-        return null;
-    }
-
-    public String getIngredientById(String id){
-        //TODO This method will return a single ingredient based on an entered ID
-        return null;
-    }
-
-
+    /**
+     * Should return a recipe if it exists, otherwise return null
+     * @param id
+     * @return
+     */
+    /*public Recipe getRecipeById(String id){
+        Optional<Recipe> possibleRecipe = null;
+        possibleRecipe = recipes.stream().findFirst().filter(x-> x.getRecipeID().equals(id));
+        return possibleRecipe.isPresent()? possibleRecipe.get():null;
+    }*/
 }
