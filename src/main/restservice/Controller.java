@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.fasterxml.jackson.databind.JsonSerializer;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import restservice.dataStorage.DataStorage;
 import restservice.dateAccess.GatherDrinkData;
-import restservice.model.Greeting;
 import restservice.model.Ingredient;
 import restservice.model.Recipe;
 
@@ -24,24 +21,16 @@ public class Controller {
 
 	HashMap<String, ArrayList<Recipe>> recipes =drinkData.getRecipeHashMap();
 
-
 	private void initialize(HashMap<String, Recipe[]> map){
 
 	}
 
 	//This is simply a testing endpoint
-	@GetMapping("/test")
+	/*@GetMapping("/test")
 	public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
 		//return new Greeting(counter.incrementAndGet(), String.format(template, name));
 		return new Greeting(counter.incrementAndGet(), String.format("Hello World", name));
-	}
-
-	//endpoint to get a random recipe
-	@GetMapping("/recipe")
-	public String getRecipe() {
-		//return ingredients;
-		return drinkData.getTestData();
-	}
+	}*/
 
 	@GetMapping("/Recipe")
 	public Recipe getRecipeTest() {
