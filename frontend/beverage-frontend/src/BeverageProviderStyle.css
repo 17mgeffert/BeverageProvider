@@ -1,0 +1,32 @@
+#titleDiv{
+	align-items: center;
+	text-align: center;
+	border-style: solid;
+	border-width: 10px;
+	border-color: black;
+	
+	border-radius: 10px;
+	/*height: 200px;
+	width: 300px;*/
+	top: 5%;
+	left:40%;
+	position: absolute;
+	
+}
+#title{
+	color: #4d3f08;
+}
+
+.desc{
+	color: #6e5909;
+	position: absolute;
+	top: 20%;
+	text-align: center;
+	margin: 40px 10% 10%;
+	border: solid;
+}
+#page{
+	justify-content: space-around;
+	align-items: center;
+	text-align: center;
+}
