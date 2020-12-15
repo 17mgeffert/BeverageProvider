@@ -6,6 +6,7 @@
     <title>Beverage Provider</title>
   <link rel="stylesheet" href="BeverageProviderStyle.css" type="text/css">
   </head>
+
   <body>
   		<div id="page">
   			<div id="titleDiv">
@@ -15,7 +16,14 @@
   			<div class="desc">
   				<p> Welcome to the Beverage Provider! Please select the ingredients that you have available. From those ingredients you will be given a random drink recipe for you to try tonight!</p>
   			</div>
-  		</div>
-  
+
+            <div id="like_button_container"></div>
+
+        </div>
+        <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+
+        <!-- Load our React component. -->
+        <script src="like_button.js"></script>
   </body>
 </html>
