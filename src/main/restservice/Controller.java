@@ -35,9 +35,9 @@ public class Controller {
 	@GetMapping("/Recipe")
 	public Recipe getRecipeTest() {
 
-		String[] arr = new String[2];
-		arr[0]="I1";
-		arr[1]="I2";
+		Ingredient[] arr = new Ingredient[2];
+		arr[0]=new Ingredient("Vodka","I1",true);
+		arr[1]=new Ingredient("Club Soda","I4",false);
 
 		Recipe r =drinkData.getRandomRecipe(arr,recipes);
 
@@ -62,7 +62,8 @@ public class Controller {
 	 */
 	@PostMapping("/find-recipe")
 	public String postRandomRecipe(@RequestBody Ingredient[] submittedIngredients){
-		return "test";
+		return new Gson().toJson(drinkData.getRandomRecipe(submittedIngredients,recipes));
+		//return "test";
 	}
 
 }

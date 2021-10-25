@@ -7,7 +7,6 @@ import restservice.model.Ingredient;
 import restservice.model.Recipe;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.*;
 
 @Component
@@ -31,7 +30,7 @@ public class GatherDrinkData {
         Recipe recipeBeingUsed = recipes.get(0);
         try {
 
-            // get Oraganisation object as a json string
+            // get Organization object as a json string
             jsonStr = mapper.writeValueAsString(recipeBeingUsed);
 
             // Displaying JSON String
@@ -60,7 +59,7 @@ public class GatherDrinkData {
      * @param map
      * @return
      */
-    public Recipe getRandomRecipe(String[] ingredients,HashMap<String, ArrayList<Recipe>>map ){
+    public Recipe getRandomRecipe(Ingredient[] ingredients,HashMap<String, ArrayList<Recipe>>map ){
         Collections.shuffle(Arrays.asList(ingredients));
 
         boolean isOver = false;
@@ -74,8 +73,8 @@ public class GatherDrinkData {
                 isOver=true;
             }
             //If Alcohol, then proceed
-            else if(map.containsKey(ingredients[index])){
-                pickedRecipe = getRecipeFromHashMap(ingredients,map.get(ingredients[index]));
+            else if(map.containsKey(ingredients[index].getIngredientId())){
+                pickedRecipe = getRecipeFromHashMap(ingredients,map.get(ingredients[index].getIngredientId()));
                 if(pickedRecipe!=null) {
                     isOver = true;
                 }
@@ -94,12 +93,12 @@ public class GatherDrinkData {
      * @param recipes
      * @return
      */
-    private Recipe getRecipeFromHashMap(String[] ingredients, ArrayList<Recipe> recipes){
+    private Recipe getRecipeFromHashMap(Ingredient[] ingredients, ArrayList<Recipe> recipes){
 
         ArrayList<Recipe> possibleRecipes=new ArrayList<>();
         for(Recipe r:recipes){
             if(r.getIngredients().size()<=ingredients.length){
-                if(Arrays.asList(ingredients).containsAll(r.getIngredients())){
+                if(confirmMatch(ingredients,r.getIngredients())){
                     possibleRecipes.add(r);
                 }
             }
@@ -108,6 +107,31 @@ public class GatherDrinkData {
             return possibleRecipes.get((int)Math.random()*(possibleRecipes.size()));
         }
         return null;
+    }
+
+    /**
+     * This helper method will take in an array of ingredients, which is the number of possible
+     * ingredients that could be used, and a recipe broken down into ingredientIds. THe goal is to
+     * compare the ids to the ingredients to see if a recipe is possible
+     *
+     *
+     * TODO: Make this not 0(n^2)
+     * @param ingredients
+     * @param keys
+     * @return
+     */
+    private boolean confirmMatch(Ingredient[] ingredients, ArrayList<String> keys){
+        boolean test = false;
+        for(String key : keys){
+            test = false;
+            for(Ingredient i : ingredients){
+                if(i.getIngredientId().equals(key)){
+                    test = true;
+                }
+            }
+            if(!test)break;
+        }
+        return test;
     }
 
 
