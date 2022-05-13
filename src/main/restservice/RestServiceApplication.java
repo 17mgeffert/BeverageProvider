@@ -15,7 +15,7 @@ public class RestServiceApplication {
         DispatcherServlet dispatcherServlet = (DispatcherServlet)context.getBean("dispatcherServlet");
         dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
         data.initialize();
-
+ 
     }
 
 }
